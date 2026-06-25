@@ -1,0 +1,53 @@
+{
+  "expo": {
+    "name": "Recipiny",
+    "slug": "recipiny",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "recipiny",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "icon": "./assets/icon.png",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "app.recipiny",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "app.recipiny",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#0B0C0B"
+      }
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-sqlite",
+      "expo-font",
+      "expo-asset",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Recipiny needs access to your photos so you can set a custom cover image for your recipes."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "backgroundColor": "#0B0C0B",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "c4f9b01d-b8d0-4d74-b6f1-351764d4d20c"
+      }
+    }
+  }
+}

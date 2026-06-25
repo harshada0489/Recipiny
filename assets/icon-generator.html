@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Recipiny — App Icon Generator</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #E7E5DF; padding: 48px 24px; color: #15140F; }
+  .wrap { max-width: 880px; margin: 0 auto; }
+  h1 { font-size: 32px; font-weight: 900; letter-spacing: -1px; margin-bottom: 4px; }
+  p { color: #565958; font-size: 15px; margin-bottom: 28px; line-height: 1.5; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .card { background: #fff; border-radius: 18px; padding: 22px; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+  .label { font-weight: 800; font-size: 15px; margin-bottom: 14px; color: #15140F; }
+  canvas { width: 220px; height: 220px; border-radius: 50px; display: block; margin: 0 auto 16px; box-shadow: 0 14px 30px -10px rgba(20,30,22,0.45); }
+  button { font-family: inherit; font-size: 14px; font-weight: 800; padding: 11px 22px; background: #22D67C; border: none; color: #06140C; border-radius: 999px; cursor: pointer; transition: transform .15s ease; }
+  button:hover { transform: translateY(-1px); }
+  button:active { transform: translateY(0); }
+  .hint { margin-top: 32px; padding: 16px 20px; background: #fff; border-left: 4px solid #22D67C; border-radius: 8px; font-size: 14px; color: #404040; line-height: 1.6; }
+  code { background: rgba(0,0,0,0.06); padding: 2px 8px; border-radius: 4px; font-family: ui-monospace, monospace; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Recipiny app icon</h1>
+  <p>Three options. Pick whichever you like, click <strong>Download</strong>, then move the file into <code>assets/icon.png</code> in your project (replacing the placeholder).</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="label">Solid green · white R</div>
+      <canvas id="c1" width="1024" height="1024"></canvas>
+      <button onclick="download('c1', 'icon-green.png')">Download</button>
+    </div>
+    <div class="card">
+      <div class="label">Dark · green tile</div>
+      <canvas id="c2" width="1024" height="1024"></canvas>
+      <button onclick="download('c2', 'icon-dark.png')">Download</button>
+    </div>
+    <div class="card">
+      <div class="label">Pin badge</div>
+      <canvas id="c3" width="1024" height="1024"></canvas>
+      <button onclick="download('c3', 'icon-pin.png')">Download</button>
+    </div>
+  </div>
+
+  <div class="hint">
+    <strong>After downloading:</strong> rename the file to exactly <code>icon.png</code> and place it in <code>c:\Users\harsh\Documents\My\Business\Recipiny\assets\</code>. Replace the placeholder you put there earlier. iOS will round the corners automatically — your icon doesn't need them.
+  </div>
+</div>
+
+<script>
+  // ─── Option 1: Solid green background with a bold white R ──────────────
+  function drawSolid(ctx) {
+    ctx.fillStyle = '#22D67C';
+    ctx.fillRect(0, 0, 1024, 1024);
+
+    ctx.fillStyle = '#06140C';
+    ctx.font = '900 720px "Nunito", "SF Pro Display", system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('R', 512, 540);
+  }
+
+  // ─── Option 2: Dark bg with a centered rounded green tile + R ──────────
+  function drawDark(ctx) {
+    ctx.fillStyle = '#0B0C0B';
+    ctx.fillRect(0, 0, 1024, 1024);
+
+    // Rounded green square in the middle
+    const size = 560;
+    const x = (1024 - size) / 2;
+    const y = (1024 - size) / 2;
+    const r = 140;
+    ctx.fillStyle = '#22D67C';
+    roundRect(ctx, x, y, size, size, r);
+    ctx.fill();
+
+    // R inside
+    ctx.fillStyle = '#06140C';
+    ctx.font = '900 380px "Nunito", "SF Pro Display", system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('R', 512, 530);
+
+    // Brand dot like Recipiny.
+    ctx.fillStyle = '#06140C';
+    ctx.beginPath();
+    ctx.arc(680, 660, 26, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  // ─── Option 3: Pin icon over green ─────────────────────────────────────
+  function drawPin(ctx) {
+    ctx.fillStyle = '#22D67C';
+    ctx.fillRect(0, 0, 1024, 1024);
+
+    // Stylized "pin" / bookmark
+    ctx.fillStyle = '#06140C';
+    ctx.beginPath();
+    ctx.moveTo(380, 230);
+    ctx.lineTo(644, 230);
+    ctx.lineTo(644, 820);
+    ctx.lineTo(512, 690);
+    ctx.lineTo(380, 820);
+    ctx.closePath();
+    ctx.fill();
+
+    // Hole top of the pin
+    ctx.fillStyle = '#22D67C';
+    ctx.beginPath();
+    ctx.arc(512, 340, 46, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+
+  function ready(cb) { document.fonts && document.fonts.ready ? document.fonts.ready.then(cb) : cb(); }
+
+  ready(() => {
+    drawSolid(document.getElementById('c1').getContext('2d'));
+    drawDark(document.getElementById('c2').getContext('2d'));
+    drawPin(document.getElementById('c3').getContext('2d'));
+  });
+
+  function download(canvasId, filename) {
+    const canvas = document.getElementById(canvasId);
+    const link = document.createElement('a');
+    link.download = filename;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }
+</script>
+</body>
+</html>

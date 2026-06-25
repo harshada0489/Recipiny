@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Recipiny</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B0C0B;
+    --surface: #141613;
+    --line: rgba(255,255,255,0.08);
+    --text: #F2F4EF;
+    --dim: #8A8F84;
+    --accent: #22D67C;
+    --on-accent: #06140C;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito', -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; padding: 24px 32px 80px; }
+  a { color: var(--accent); }
+
+  header { max-width: 760px; margin: 0 auto 40px; display: flex; align-items: center; justify-content: space-between; padding: 8px 0 24px; border-bottom: 1px solid var(--line); }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 22px; letter-spacing: -0.6px; }
+  .brand-icon { width: 32px; height: 32px; border-radius: 10px; background: var(--accent); display: flex; align-items: center; justify-content: center; color: var(--on-accent); font-weight: 900; font-size: 18px; }
+  .brand-dot { color: var(--accent); }
+  nav a { color: var(--dim); font-weight: 700; font-size: 14px; text-decoration: none; margin-left: 20px; }
+  nav a:hover { color: var(--text); }
+
+  main { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 42px; font-weight: 900; letter-spacing: -1.4px; margin-bottom: 12px; }
+  .updated { color: var(--dim); font-weight: 700; margin-bottom: 36px; }
+  h2 { font-size: 22px; font-weight: 900; letter-spacing: -0.4px; margin-top: 36px; margin-bottom: 12px; }
+  p, li { color: var(--text); font-weight: 500; font-size: 16px; }
+  ul { padding-left: 24px; margin-bottom: 16px; }
+  li { margin-bottom: 6px; }
+  strong { color: var(--text); font-weight: 800; }
+  .lead { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 8px; margin-bottom: 32px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="brand-icon">R</div>
+    <span>Recipiny<span class="brand-dot">.</span></span>
+  </div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="mailto:mycreativelab26@gmail.com">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: 23 June 2026</p>
+
+  <div class="lead">
+    <strong>The short version.</strong> Recipiny is local-first. Your recipes, notes, grocery items, and cover photos live only on your phone — never on our servers. We collect the minimum required to let you sign in and to extract recipes from links you choose to share with us. We don't sell, rent or share your data with advertisers.
+  </div>
+
+  <h2>1. Who we are</h2>
+  <p>"Recipiny", "we", "us" and "our" refer to the developer of the Recipiny mobile application. If you need to reach us, email <a href="mailto:mycreativelab26@gmail.com">mycreativelab26@gmail.com</a>.</p>
+
+  <h2>2. What we collect</h2>
+  <p>We collect only what we need to operate the app:</p>
+  <ul>
+    <li><strong>Email address</strong> — used as your account identifier when you sign in. Stored with our authentication provider (Amazon Cognito).</li>
+    <li><strong>Password</strong> — never stored by us in plaintext. Hashed and managed entirely by Amazon Cognito.</li>
+    <li><strong>The URL you paste</strong> — sent transiently to our recipe-extraction service so we can fetch the recipe text. Not stored after the response is returned.</li>
+  </ul>
+
+  <h2>3. What stays on your device</h2>
+  <p>The following data lives <strong>only</strong> in your phone's local storage and is never transmitted to us:</p>
+  <ul>
+    <li>Saved recipes (title, ingredients, steps, cook time, calories, source URL)</li>
+    <li>Personal notes you add to recipes</li>
+    <li>Custom cover images you upload</li>
+    <li>Grocery list items</li>
+    <li>Meal plan entries</li>
+    <li>Cook history, checked ingredients and other per-recipe state</li>
+  </ul>
+  <p>When you delete a recipe in the app, it is removed from your device. We never had a copy.</p>
+
+  <h2>4. Third-party services we use</h2>
+  <p>When you tap "Pin" with a recipe link, the URL is sent to our backend, which calls these third-party services on your behalf to extract the recipe:</p>
+  <ul>
+    <li><strong>Amazon Web Services (Cognito)</strong> — handles account creation, sign-in and password reset.</li>
+    <li><strong>Cloudflare Workers</strong> — hosts the recipe-extraction backend. Cloudflare may briefly process the request as it transits their network.</li>
+    <li><strong>OpenAI</strong> — receives the scraped text of a post (caption, description or transcript) and returns a structured recipe. OpenAI's privacy practices apply to that processing.</li>
+    <li><strong>Apify</strong> — used to read public Instagram posts when you import an Instagram link.</li>
+    <li><strong>Deepgram</strong> — used to transcribe the audio of a video when no caption is available. The audio file is fetched from the source platform, sent to Deepgram for transcription, and discarded after the transcript is returned.</li>
+    <li><strong>YouTube Data API</strong> — used to read public YouTube titles, descriptions and thumbnails.</li>
+  </ul>
+  <p>None of these services receive your account email or your saved recipes — only the specific post you choose to import.</p>
+
+  <h2>5. What we do not do</h2>
+  <ul>
+    <li>We do not sell or rent your data to anyone.</li>
+    <li>We do not run ads inside Recipiny.</li>
+    <li>We do not track your browsing across other apps or websites.</li>
+    <li>We do not collect analytics on your individual usage of recipes (which ones you cooked, when, etc.).</li>
+  </ul>
+
+  <h2>6. Backups</h2>
+  <p>The "Back up my recipes" feature exports your local database to a JSON file and hands it to your device's share sheet — so you decide where to save it (iCloud Drive, Google Drive, Files, email to yourself, etc.). The backup file does not pass through our servers. We never see it.</p>
+
+  <h2>7. Your rights and choices</h2>
+  <ul>
+    <li><strong>Access:</strong> all your recipe data is visible inside the app at any time.</li>
+    <li><strong>Export:</strong> use "Back up my recipes" in Profile to take your data anywhere.</li>
+    <li><strong>Deletion of account:</strong> email <a href="mailto:mycreativelab26@gmail.com">mycreativelab26@gmail.com</a> from your registered address and we'll delete your account and any associated authentication record within 30 days.</li>
+    <li><strong>Deletion of recipes:</strong> delete recipes individually from the recipe screen, or uninstall the app to remove all local data at once.</li>
+  </ul>
+
+  <h2>8. Children</h2>
+  <p>Recipiny is not directed at children under 13 and we do not knowingly collect data from them. If you believe a child has signed up, contact us and we will remove the account.</p>
+
+  <h2>9. Changes</h2>
+  <p>If we update this policy, we'll update the "Last updated" date at the top. Significant changes will be announced in-app at next launch.</p>
+
+  <h2>10. Contact</h2>
+  <p>For any privacy question or request, email <a href="mailto:mycreativelab26@gmail.com">mycreativelab26@gmail.com</a>.</p>
+</main>
+
+</body>
+</html>
