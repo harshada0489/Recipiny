@@ -54,7 +54,7 @@ export default function HomeScreen() {
     if (!url || !/^https?:\/\//i.test(url)) {
       Alert.alert(
         'Paste a recipe link',
-        'Copy a link from Instagram, TikTok or YouTube, then tap Pin again.',
+        'Copy a link from YouTube, TikTok or Instagram, then tap Pin again.',
       );
       return;
     }
@@ -91,7 +91,7 @@ export default function HomeScreen() {
             onPress={onPin}
           />
 
-          <Text style={styles.helper}>from Instagram, TikTok or YouTube</Text>
+          <Text style={styles.helper}>from YouTube, TikTok or Instagram</Text>
 
           <PrimaryButton
             label="Try it: share from YouTube"
