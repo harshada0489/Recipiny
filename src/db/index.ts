@@ -53,6 +53,13 @@ export async function initDb(): Promise<void> {
       date TEXT NOT NULL,
       slot TEXT NOT NULL
     );
+
+    CREATE TABLE IF NOT EXISTS pin_events (
+      id TEXT PRIMARY KEY,
+      created_at INTEGER NOT NULL
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_pin_events_created_at ON pin_events(created_at);
   `);
 
   await db.runAsync(

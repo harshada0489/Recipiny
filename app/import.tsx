@@ -8,6 +8,7 @@ import { font } from '@/theme/type';
 import { ClipboardIcon, CloseIcon } from '@/components/Icon';
 import { importRecipeFromUrl } from '@/services/importer';
 import { saveRecipe } from '@/db/recipes';
+import { recordPin } from '@/db/pinEvents';
 
 const STATUS_LINES = [
   'Reading the link…',
@@ -48,6 +49,9 @@ export default function ImportScreen() {
         const incoming = await importRecipeFromUrl(url ?? '');
         if (cancelled) return;
         const saved = await saveRecipe(incoming);
+        // Log the successful pin so it counts against the weekly cap.
+        // We don't await — pin tracking failure shouldn't block navigation.
+        recordPin().catch(() => {});
         router.replace({ pathname: '/recipe/[id]', params: { id: saved.id } });
       } catch (e: any) {
         if (cancelled) return;

@@ -10,6 +10,12 @@ import { PrimaryButton } from '@/components/PrimaryButton';
 import { ClipboardIcon, InstagramIcon } from '@/components/Icon';
 import { RecipeRow } from '@/components/RecipeRow';
 import { listRecipes } from '@/db/recipes';
+import {
+  WEEKLY_PIN_LIMIT,
+  countPinsThisWeek,
+  formatResetDate,
+  getNextWeeklyReset,
+} from '@/db/pinEvents';
 import type { Recipe } from '@/types/recipe';
 
 export default function HomeScreen() {
@@ -24,6 +30,23 @@ export default function HomeScreen() {
   useFocusEffect(useCallback(() => { reload(); }, [reload]));
 
   const onPin = async () => {
+    // First check: is the user under their weekly pin limit?
+    try {
+      const used = await countPinsThisWeek();
+      if (used >= WEEKLY_PIN_LIMIT) {
+        const resetOn = formatResetDate(getNextWeeklyReset());
+        Alert.alert(
+          'Weekly limit reached',
+          `You've already pinned ${WEEKLY_PIN_LIMIT} recipes this week — that's the weekly cap. Your next pin opens up on ${resetOn}.`,
+        );
+        return;
+      }
+    } catch (e) {
+      // If the count itself fails, fall through and let them try — better to
+      // allow an extra pin than to block them because of a DB hiccup.
+      console.warn('countPinsThisWeek failed', e);
+    }
+
     let url = '';
     try {
       url = (await Clipboard.getStringAsync()) || '';
