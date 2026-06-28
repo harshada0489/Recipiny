@@ -7,7 +7,7 @@ import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 import { colors, spacing } from '@/theme/colors';
 import { font } from '@/theme/type';
 import { PrimaryButton } from '@/components/PrimaryButton';
-import { ClipboardIcon, InstagramIcon } from '@/components/Icon';
+import { ClipboardIcon, YouTubeIcon } from '@/components/Icon';
 import { RecipeRow } from '@/components/RecipeRow';
 import { listRecipes } from '@/db/recipes';
 import {
@@ -61,18 +61,18 @@ export default function HomeScreen() {
     router.push({ pathname: '/import', params: { url } });
   };
 
-  const onTryInstagram = async () => {
-    // Try the native Instagram deep link first. If Instagram isn't
-    // installed, this rejects on iOS / fails on Android — we then fall
-    // back to the web URL, which the OS routes to the Instagram app via
-    // universal links (or opens in the browser if no app is installed).
+  const onTryYouTube = async () => {
+    // Try the native YouTube deep link first. If YouTube isn't installed,
+    // the call fails — we then fall back to the web URL, which the OS
+    // routes to the YouTube app via universal links (or opens in the
+    // browser if no app is installed).
     try {
-      await Linking.openURL('instagram://app');
+      await Linking.openURL('youtube://');
     } catch {
       try {
-        await Linking.openURL('https://www.instagram.com');
+        await Linking.openURL('https://www.youtube.com');
       } catch {
-        Alert.alert('Could not open Instagram', 'No app or browser is available.');
+        Alert.alert('Could not open YouTube', 'No app or browser is available.');
       }
     }
   };
@@ -94,10 +94,10 @@ export default function HomeScreen() {
           <Text style={styles.helper}>from Instagram, TikTok or YouTube</Text>
 
           <PrimaryButton
-            label="Try it: share from Instagram"
+            label="Try it: share from YouTube"
             variant="secondary"
-            icon={<InstagramIcon />}
-            onPress={onTryInstagram}
+            icon={<YouTubeIcon />}
+            onPress={onTryYouTube}
             style={{ marginTop: 16 }}
           />
         </View>
